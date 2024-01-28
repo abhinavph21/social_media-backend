@@ -1,6 +1,8 @@
 package com.example.SocialMediabackend.controller;
 
 import com.example.SocialMediabackend.model.User;
+import com.example.SocialMediabackend.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,6 +10,8 @@ import java.util.List;
 
 @RestController
 public class UserController {
+    @Autowired
+    UserRepository userRepository;
     @GetMapping("/users")
     public List<User> getAllUsers(){
         List<User> users = new ArrayList<>();
@@ -26,13 +30,19 @@ public class UserController {
     }
     @PostMapping("/users")
     public User createUser(@RequestBody User inputUser){
-        User outputUser = new User();
-        outputUser.setId(inputUser.getId());
-        outputUser.setFirstName(inputUser.getFirstName());
-        outputUser.setLastName(inputUser.getLastName());
-        outputUser.setEmail(inputUser.getEmail());
-        outputUser.setPassword(inputUser.getPassword());
-        return outputUser;
+        User newUser = new User();
+        newUser.setId(inputUser.getId());
+        newUser.setFirstName(inputUser.getFirstName());
+        newUser.setLastName(inputUser.getLastName());
+        newUser.setEmail(inputUser.getEmail());
+        newUser.setPassword(inputUser.getPassword());
+        User savedUser=null;
+        try {
+            savedUser= userRepository.saveAndFlush(newUser);
+        } catch (Exception exception){
+            System.out.println(exception.toString());
+        }
+        return savedUser;
     }
     @PutMapping("/users")
     public User updateUser( @RequestBody User user) {
