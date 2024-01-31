@@ -2,24 +2,20 @@ package com.example.SocialMediabackend.controller;
 
 import com.example.SocialMediabackend.model.User;
 import com.example.SocialMediabackend.repository.UserRepository;
+import com.example.SocialMediabackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class UserController {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserService userService;
     @GetMapping("/users")
     public List<User> getAllUsers(){
-//        List<User> users = new ArrayList<>();
-//        User user1 = new User(1, "abhinav", "pass", "ap.abhinav16", "abhinav", "pharswan", "78555");
-//        User user2 = new User(2, "abhinav", "pass", "ap.abhinav16", "abhinav", "pharswan", "78555");
-//        users.add(user1);
-//        users.add(user2);
         List<User> users = null;
         try{
             users = userRepository.findAll();
@@ -30,57 +26,50 @@ public class UserController {
     }
     @GetMapping("/users/{userId}")
     public User getUserById(@PathVariable Integer userId) throws Exception {
-//        User user = new User(1, "abhinav", "pass", "ap.abhinav16", "abhinav", "pharswan", "78555");
-//        user.setId(userId);
-//        User user2 = new User(2, "abhinav", "pass", "ap.abhinav16", "abhinav", "pharswan", "78555");
-        Optional<User> user = userRepository.findById(userId);
-        if(user.isPresent()){
-            return user.get();
+        try {
+            User foundUser = userService.findUserById(userId);
+            return foundUser;
+        } catch(Exception exception) {
+            throw new Exception(exception.toString());
         }
-        throw new Exception("user not found");
     }
     @PostMapping("/users")
-    public User createUser(@RequestBody User inputUser){
-        User newUser = new User();
-        newUser.setId(inputUser.getId());
-        newUser.setFirstName(inputUser.getFirstName());
-        newUser.setLastName(inputUser.getLastName());
-        newUser.setEmail(inputUser.getEmail());
-        newUser.setPassword(inputUser.getPassword());
-        User savedUser=null;
+    public User createUser(@RequestBody User inputUser) throws Exception {
         try {
-            savedUser= userRepository.saveAndFlush(newUser);
-        } catch (Exception exception){
-            System.out.println(exception.toString());
+            User user = userService.registerUser(inputUser);
+            return user;
         }
-        return savedUser;
+        catch (Exception exception){
+            throw new Exception(exception.toString());
+        }
     }
     @PutMapping("/users/{userId}")
     public User updateUser( @RequestBody User user, @PathVariable Integer userId) throws Exception {
-//        User newUser = new User(1, "abhinav", "pass", "ap.abhinav16", "abhinav", "pharswan", "78555");
-        User newUser = null;
-        User updatedUser = null;
-        Optional<User> foundUser = userRepository.findById(userId);
-        if(foundUser.isPresent()){
-            newUser = foundUser.get();
-            if(user.getFirstName()!=null)
-                newUser.setFirstName(user.getFirstName());
-            if(user.getLastName()!=null)
-                newUser.setLastName(user.getLastName());
-            if(user.getEmail()!=null)
-                newUser.setEmail(user.getEmail());
-            if(user.getPassword()!=null)
-                newUser.setPassword(user.getPassword());
-            updatedUser = userRepository.saveAndFlush(newUser);
+        try {
+            User updatedUser = userService.updateUserById(user, userId);
             return updatedUser;
+        }catch (Exception exception){
+            System.out.println(exception.toString());
+            throw new Exception(exception.toString());
         }
-        throw new Exception("user not found");
     }
-    @DeleteMapping("/users/{userId}")
-    public String deleteUserById(@PathVariable Integer userId){
-        Optional<User> userToBeDeleted = userRepository.findById(userId);
-        if(userToBeDeleted.isEmpty())
-            return "user not found";
-        return "deleted user with id "+userId;
+    @PutMapping("/users/follow/{userId1}/{userId2}")
+    public User followUser( @PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception {
+        try {
+            User userWhoFollows = userService.followUserById(userId1, userId2);
+            return userWhoFollows;
+        }catch (Exception exception){
+            System.out.println(exception.toString());
+            throw new Exception(exception.toString());
+        }
+    }
+    @GetMapping("/users/search")
+    public Set<User> getUserByQuery(@RequestParam("query") String query) throws Exception {
+        try {
+            Set<User> foundUsers = userService.findUserByQuery(query);
+            return foundUsers;
+        } catch(Exception exception) {
+            throw new Exception(exception.toString());
+        }
     }
 }

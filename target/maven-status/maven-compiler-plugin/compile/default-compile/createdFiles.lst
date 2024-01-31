@@ -1,5 +1,7 @@
 com/example/SocialMediabackend/repository/UserRepository.class
 com/example/SocialMediabackend/SocialMediaBackendApplication.class
 com/example/SocialMediabackend/model/User.class
+com/example/SocialMediabackend/service/UserService.class
+com/example/SocialMediabackend/service/UserServiceImplementation.class
 com/example/SocialMediabackend/controller/UserController.class
 com/example/SocialMediabackend/controller/HomeController.class
