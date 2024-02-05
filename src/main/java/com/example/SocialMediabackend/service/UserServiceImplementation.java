@@ -3,13 +3,15 @@ package com.example.SocialMediabackend.service;
 import com.example.SocialMediabackend.model.User;
 import com.example.SocialMediabackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-@Component
+
+@Service
 public class UserServiceImplementation implements UserService{
     @Autowired
     UserRepository userRepository;
