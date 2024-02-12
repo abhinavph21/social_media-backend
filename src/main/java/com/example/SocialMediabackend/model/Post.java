@@ -47,7 +47,7 @@ public class Post {
     @ManyToOne
     private User user;
 
-    @ManyToMany
+    @OneToMany
     private Set<User> liked;
 
 }

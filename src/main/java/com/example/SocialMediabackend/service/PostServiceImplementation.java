@@ -7,8 +7,10 @@ import com.example.SocialMediabackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -26,10 +28,11 @@ public class PostServiceImplementation implements PostService{
             Post newPost = new Post();
             newPost.setCaption(post.getCaption());
             newPost.setVideo(post.getVideo());
-            newPost.setImage(post.getVideo());
-//            newPost.setCreatedAt(new DateTime);
+            newPost.setImage(post.getImage());
+            newPost.setCreatedAt(LocalDateTime.now());
             newPost.setUser(foundUser);
-            return newPost;
+            Post savedPost = postRepository.saveAndFlush(newPost);
+            return savedPost;
         }catch (Exception exception){
             throw new Exception(exception.toString());
         }
@@ -90,15 +93,22 @@ public class PostServiceImplementation implements PostService{
             Post post = findPostById(postId);
             User user = userService.findUserById(userId);
             Set<Post> savedPosts=user.getSavedPosts();
+
             if(savedPosts==null){
+                System.out.println("no saved posts");
                 savedPosts=new HashSet<>();
                 savedPosts.add(post);
                 user.setSavedPosts(savedPosts);
             }
-            else if(savedPosts.contains(post))
+            else if(savedPosts.contains(post)) {
                 savedPosts.remove(post);
-            else
+                System.out.println("already saved post");
+            }
+            else {
                 savedPosts.add(post);
+                System.out.println("saved post");
+            }
+            System.out.println();
             userRepository.save(user);
             return post;
         }catch (Exception exception){
@@ -108,6 +118,9 @@ public class PostServiceImplementation implements PostService{
 
     @Override
     public Post findPostById(Integer postId) throws Exception {
-        return null;
+        Optional<Post> post= postRepository.findById(postId);
+        if(post.isPresent())
+            return post.get();
+        throw new Exception("not post found with given id");
     }
 }

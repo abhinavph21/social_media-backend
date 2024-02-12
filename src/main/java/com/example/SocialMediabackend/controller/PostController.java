@@ -9,16 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@RestController
 public class PostController {
     @Autowired
     PostService postService;
-    @PostMapping("/posts/user/{userId}")
+    @PostMapping("/posts/users/{userId}")
     public ResponseEntity<Post> createPost(@RequestBody Post post, @PathVariable Integer userId) throws Exception {
         try {
             Post newPost = postService.createPost(post, userId);
             return new ResponseEntity<>(newPost, HttpStatus.OK);
         } catch (Exception exception){
+            System.out.println(exception.toString());
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
@@ -37,7 +38,7 @@ public class PostController {
         Post post = postService.findPostById(postId);
         return new ResponseEntity<>(post, HttpStatus.ACCEPTED);
     }
-    @GetMapping("/posts/user/{userId}")
+    @GetMapping("/posts/users/{userId}")
     public ResponseEntity<List<Post>> findUserPosts(@PathVariable Integer userId) throws Exception {
         List<Post> posts = postService.findPostsByUserId(userId);
         return new ResponseEntity<>(posts, HttpStatus.OK);
@@ -47,14 +48,18 @@ public class PostController {
         List<Post> posts = postService.findAllPost();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
-    @PutMapping("/posts/{postId}/users/{userId}")
+    @PutMapping("/posts/{postId}/save/users/{userId}")
     public ResponseEntity<Post> savePostHandler(@PathVariable Integer postId, @PathVariable Integer userId) throws Exception{
         Post post = postService.savePost(postId, userId);
         return new ResponseEntity<>(post, HttpStatus.ACCEPTED);
     }
     @PutMapping("/posts/{postId}/likes/users/{userId}")
-    public ResponseEntity<Post> savedPostHandler(@PathVariable Integer postId, @PathVariable Integer userId) throws Exception{
-        Post post = postService.likePost(postId, userId);
-        return new ResponseEntity<>(post, HttpStatus.ACCEPTED);
+    public ResponseEntity<Post> likePost(@PathVariable Integer postId, @PathVariable Integer userId) throws Exception{
+        try {
+            Post post = postService.likePost(postId, userId);
+            return new ResponseEntity<>(post, HttpStatus.ACCEPTED);
+        } catch (Exception exception){
+            throw new Exception(exception.toString());
+        }
     }
 }
