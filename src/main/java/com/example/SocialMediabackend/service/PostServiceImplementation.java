@@ -108,7 +108,6 @@ public class PostServiceImplementation implements PostService{
                 savedPosts.add(post);
                 System.out.println("saved post");
             }
-            System.out.println();
             userRepository.save(user);
             return post;
         }catch (Exception exception){

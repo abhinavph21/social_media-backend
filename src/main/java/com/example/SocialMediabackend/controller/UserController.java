@@ -14,7 +14,7 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     UserService userService;
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public List<User> getAllUsers(){
         List<User> users = null;
         try{

@@ -18,6 +18,7 @@ public class UserServiceImplementation implements UserService{
     @Override
     public User registerUser(User inputUser) throws Exception {
         User newUser = new User();
+        newUser.setUsername(inputUser.getUsername());
         newUser.setId(inputUser.getId());
         newUser.setFirstName(inputUser.getFirstName());
         newUser.setLastName(inputUser.getLastName());
