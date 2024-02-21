@@ -14,7 +14,7 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     UserService userService;
-    @GetMapping("/api/users")
+    @GetMapping("api/users")
     public List<User> getAllUsers(){
         List<User> users = null;
         try{
@@ -24,7 +24,7 @@ public class UserController {
         }
         return users;
     }
-    @GetMapping("/users/{userId}")
+    @GetMapping("/api/users/{userId}")
     public User getUserById(@PathVariable Integer userId) throws Exception {
         try {
             User foundUser = userService.findUserById(userId);
@@ -33,7 +33,7 @@ public class UserController {
             throw new Exception(exception.toString());
         }
     }
-    @PostMapping("/users")
+    @PostMapping("/api/users")
     public User createUser(@RequestBody User inputUser) throws Exception {
         try {
             User user = userService.registerUser(inputUser);
@@ -43,7 +43,7 @@ public class UserController {
             throw new Exception(exception.toString());
         }
     }
-    @PutMapping("/users/{userId}")
+    @PutMapping("/api/users/{userId}")
     public User updateUser( @RequestBody User user, @PathVariable Integer userId) throws Exception {
         try {
             User updatedUser = userService.updateUserById(user, userId);
@@ -53,7 +53,7 @@ public class UserController {
             throw new Exception(exception.toString());
         }
     }
-    @PutMapping("/users/follow/{userId1}/{userId2}")
+    @PutMapping("/api/users/follow/{userId1}/{userId2}")
     public User followUser( @PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception {
         try {
             User userWhoFollows = userService.followUserById(userId1, userId2);
@@ -63,12 +63,21 @@ public class UserController {
             throw new Exception(exception.toString());
         }
     }
-    @GetMapping("/users/search")
+    @GetMapping("/api/users/search")
     public Set<User> getUserByQuery(@RequestParam("query") String query) throws Exception {
         try {
             Set<User> foundUsers = userService.findUserByQuery(query);
             return foundUsers;
         } catch(Exception exception) {
+            throw new Exception(exception.toString());
+        }
+    }
+    @GetMapping("/api/users/profile")
+    public User getUserFromToken(@RequestHeader("Authorization") String jwt) throws  Exception{
+        try {
+            User user = userService.findUserByJwt(jwt);
+            return user;
+        } catch (Exception exception){
             throw new Exception(exception.toString());
         }
     }

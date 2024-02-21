@@ -16,7 +16,7 @@ public class CommentController {
     @Autowired
     private UserService userService;
     public Comment createComment(@RequestBody Comment inputComment, @RequestHeader("Authorization") String jwt){
-        User user = userService.findUserBy
+//        User user = userService.findUserBy
         return null;
     }
 }

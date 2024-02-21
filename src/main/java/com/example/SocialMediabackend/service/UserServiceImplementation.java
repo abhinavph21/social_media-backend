@@ -1,5 +1,6 @@
 package com.example.SocialMediabackend.service;
 
+import com.example.SocialMediabackend.config.JwtProvider;
 import com.example.SocialMediabackend.model.User;
 import com.example.SocialMediabackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,16 @@ public class UserServiceImplementation implements UserService{
             throw new Exception(exception.toString());
         }
     }
+
+    @Override
+    public User findUserByJwt(String jwt) throws Exception{
+        String email = JwtProvider.getEmailFromJwtToken(jwt);
+        Optional<User> user=userRepository.findByEmail(email);
+        if(user.isPresent())
+            return user.get();
+        throw new Exception("user not found with given token");
+    }
+
     public User followUserById(Integer userId1, Integer userId2) throws Exception {
         System.out.println(userId1+ " "+userId2);
         try{

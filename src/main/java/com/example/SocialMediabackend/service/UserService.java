@@ -10,12 +10,13 @@ public interface UserService {
 
     public User findUserById(Integer id) throws Exception;
 
-
     public User findUserByEmail(String email) throws Exception;
 
     public List<User> findUsersByUserIds(List<Integer> userIds);
 
     public Set<User> findUserByQuery(String query) throws Exception;
+
+    public User findUserByJwt(String jwt) throws Exception;
 
     public User followUserById(Integer reqUserId, Integer followUserId) throws Exception;
 
