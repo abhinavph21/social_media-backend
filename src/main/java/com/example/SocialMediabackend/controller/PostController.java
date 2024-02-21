@@ -39,22 +39,22 @@ public class PostController {
             return new ResponseEntity<>(new ApiResponse(exception.toString(), false), HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
-    @GetMapping("/posts/{postId}")
+    @GetMapping("/api/posts/{postId}")
     public ResponseEntity<Post> findPostByIdHandler(@PathVariable Integer postId) throws Exception{
         Post post = postService.findPostById(postId);
         return new ResponseEntity<>(post, HttpStatus.ACCEPTED);
     }
-    @GetMapping("/posts/users/{userId}")
+    @GetMapping("/api/posts/users/{userId}")
     public ResponseEntity<List<Post>> findUserPosts(@PathVariable Integer userId) throws Exception {
         List<Post> posts = postService.findPostsByUserId(userId);
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
-    @GetMapping("/posts")
+    @GetMapping("/api/posts")
     public ResponseEntity<List<Post>> findAllPosts() throws Exception {
         List<Post> posts = postService.findAllPost();
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
-    @PutMapping("/posts/{postId}/save")
+    @PutMapping("/api/posts/{postId}/save")
     public ResponseEntity<Post> savePostHandler(@RequestHeader("Authorization")String jwt,@PathVariable Integer postId) throws Exception{
         try {
             User reqUser = userService.findUserByJwt(jwt);
@@ -64,7 +64,7 @@ public class PostController {
             throw new Exception(exception.toString());
         }
     }
-    @PutMapping("/posts/{postId}/like")
+    @PutMapping("/api/posts/{postId}/like")
     public ResponseEntity<Post> likePost(@RequestHeader("Authorization")String jwt,@PathVariable Integer postId) throws Exception{
         try {
             User reqUser = userService.findUserByJwt(jwt);
