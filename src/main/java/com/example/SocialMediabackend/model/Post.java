@@ -50,4 +50,7 @@ public class Post {
     @OneToMany
     private Set<User> liked;
 
+    @OneToMany
+    private List<Comment> comments;
+
 }

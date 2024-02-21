@@ -10,6 +10,7 @@ public interface UserService {
 
     public User findUserById(Integer id) throws Exception;
 
+
     public User findUserByEmail(String email) throws Exception;
 
     public List<User> findUsersByUserIds(List<Integer> userIds);
