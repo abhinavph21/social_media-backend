@@ -78,11 +78,11 @@ public class UserServiceImplementation implements UserService{
         throw new Exception("user not found with given token");
     }
 
-    public User followUserById(Integer userId1, Integer userId2) throws Exception {
-        System.out.println(userId1+ " "+userId2);
+    public User followUserById(Integer reqUserId, Integer userId2) throws Exception {
+        System.out.println(reqUserId+ " "+userId2);
         try{
+            User userWhoFollows = findUserById(reqUserId);
             User userToFollow = findUserById(userId2);
-            User userWhoFollows = findUserById(userId1);
 
             List<Integer> following = userWhoFollows.getFollowing();
             List<Integer> followers = userToFollow.getFollowers();
@@ -97,9 +97,9 @@ public class UserServiceImplementation implements UserService{
             }
 
             following.add(userId2);
-            followers.add(userId1);
+            followers.add(reqUserId);
 
-            System.out.println(userId1+ " following " + userWhoFollows.getFollowing());
+            System.out.println(reqUserId+ " following " + userWhoFollows.getFollowing());
 
             userRepository.saveAndFlush(userToFollow);
             User updatedUserWhoFollows = userRepository.saveAndFlush(userWhoFollows);
@@ -122,6 +122,8 @@ public class UserServiceImplementation implements UserService{
                 foundUser.setEmail(user.getEmail());
             if(user.getPassword()!=null)
                 foundUser.setPassword(user.getPassword());
+            if (user.getGender()!=null)
+                foundUser.setGender(user.getGender());
             updatedUser = userRepository.saveAndFlush(foundUser);
             return updatedUser;
         } catch(Exception exception){

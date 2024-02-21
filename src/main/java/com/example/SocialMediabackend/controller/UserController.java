@@ -43,20 +43,22 @@ public class UserController {
             throw new Exception(exception.toString());
         }
     }
-    @PutMapping("/api/users/{userId}")
-    public User updateUser( @RequestBody User user, @PathVariable Integer userId) throws Exception {
+    @PutMapping("/api/users")
+    public User updateUser(@RequestHeader("Authorization")String jwt, @RequestBody User user) throws Exception {
         try {
-            User updatedUser = userService.updateUserById(user, userId);
+            User reqUser = userService.findUserByJwt(jwt);
+            User updatedUser = userService.updateUserById(user, reqUser.getId());
             return updatedUser;
         }catch (Exception exception){
             System.out.println(exception.toString());
             throw new Exception(exception.toString());
         }
     }
-    @PutMapping("/api/users/follow/{userId1}/{userId2}")
-    public User followUser( @PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception {
+    @PutMapping("/api/users/follow/{userId2}")
+    public User followUser(@RequestHeader("Authorization")String jwt,  @PathVariable Integer userId2) throws Exception {
         try {
-            User userWhoFollows = userService.followUserById(userId1, userId2);
+            User reqUser = userService.findUserByJwt(jwt);
+            User userWhoFollows = userService.followUserById(reqUser.getId(), userId2);
             return userWhoFollows;
         }catch (Exception exception){
             System.out.println(exception.toString());
@@ -76,6 +78,7 @@ public class UserController {
     public User getUserFromToken(@RequestHeader("Authorization") String jwt) throws  Exception{
         try {
             User user = userService.findUserByJwt(jwt);
+            user.setPassword(null);
             return user;
         } catch (Exception exception){
             throw new Exception(exception.toString());
