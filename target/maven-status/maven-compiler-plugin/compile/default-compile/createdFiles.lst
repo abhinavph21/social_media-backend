@@ -2,7 +2,9 @@ com/example/SocialMediabackend/repository/UserRepository.class
 com/example/SocialMediabackend/SocialMediaBackendApplication.class
 com/example/SocialMediabackend/repository/CommentRepository.class
 com/example/SocialMediabackend/service/CustomerUserDetailsService.class
+com/example/SocialMediabackend/repository/ReelRepository.class
 com/example/SocialMediabackend/model/Post.class
+com/example/SocialMediabackend/service/ReelServiceImplementation.class
 com/example/SocialMediabackend/controller/PostController.class
 com/example/SocialMediabackend/controller/AuthController.class
 com/example/SocialMediabackend/model/User.class
@@ -15,11 +17,14 @@ com/example/SocialMediabackend/service/AuthResponse.class
 com/example/SocialMediabackend/config/JwtValidator.class
 com/example/SocialMediabackend/service/UserService.class
 com/example/SocialMediabackend/config/AppConfig.class
+com/example/SocialMediabackend/model/Reel.class
 com/example/SocialMediabackend/controller/CommentController.class
 com/example/SocialMediabackend/service/CommentService.class
 com/example/SocialMediabackend/service/UserServiceImplementation.class
 com/example/SocialMediabackend/config/JwtConstant.class
+com/example/SocialMediabackend/controller/ReelController.class
 com/example/SocialMediabackend/response/ApiResponse.class
 com/example/SocialMediabackend/service/PostService.class
+com/example/SocialMediabackend/service/ReelService.class
 com/example/SocialMediabackend/service/PostServiceImplementation.class
 com/example/SocialMediabackend/controller/HomeController.class
