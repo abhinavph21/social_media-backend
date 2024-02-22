@@ -1,6 +1,7 @@
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/service/CustomerUserDetailsService.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/config/JwtValidator.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/controller/AuthController.java
+/Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/repository/StoryRepository.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/service/UserServiceImplementation.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/SocialMediaBackendApplication.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/controller/HomeController.java
@@ -17,12 +18,16 @@
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/repository/UserRepository.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/model/Post.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/request/LoginRequest.java
+/Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/service/StoryServiceImplementation.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/service/CommentService.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/repository/CommentRepository.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/repository/ReelRepository.java
+/Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/service/StoryService.java
+/Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/controller/StoryController.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/controller/PostController.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/service/ReelServiceImplementation.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/model/User.java
+/Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/model/Story.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/config/JwtConstant.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/controller/CommentController.java
 /Users/tnluser/Downloads/projects/social-media/social_media-backend/src/main/java/com/example/SocialMediabackend/repository/PostRepository.java

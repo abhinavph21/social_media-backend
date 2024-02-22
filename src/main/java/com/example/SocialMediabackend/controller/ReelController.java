@@ -35,7 +35,7 @@ public class ReelController {
         }
     }
     @GetMapping("/api/users/{userId}/reels")
-    public List<Reel> findUsersReels(@PathVariable Integer userId) throws Exception{
+    public List<Reel> findUserReels(@PathVariable Integer userId) throws Exception{
         try {
             List<Reel> foundReels = reelService.findUsersReel(userId);
             return foundReels;
