@@ -29,7 +29,7 @@ public class ChatController {
         }
     }
     @GetMapping("/api/chats")
-    public List<Chat> createChat(@RequestHeader("Authorization") String jwt) throws Exception {
+    public List<Chat> getChats(@RequestHeader("Authorization") String jwt) throws Exception {
         try {
             User reqUser = userService.findUserByJwt(jwt);
             List<Chat> chats = chatService.findUserChats(reqUser.getId());

@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "chats")
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,4 +26,9 @@ public class Chat {
     private List<User> users;
 
     private LocalDateTime timestamp;
+
+    // so that extra table isn't created for message (message_chat)
+    @OneToMany(mappedBy = "chat")
+    private List<Message> messages;
+
 }
