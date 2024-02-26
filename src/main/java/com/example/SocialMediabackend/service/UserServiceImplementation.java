@@ -1,6 +1,7 @@
 package com.example.SocialMediabackend.service;
 
 import com.example.SocialMediabackend.config.JwtProvider;
+import com.example.SocialMediabackend.exceptions.UserException;
 import com.example.SocialMediabackend.model.User;
 import com.example.SocialMediabackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,21 +37,21 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public User findUserById(Integer id) throws Exception {
+    public User findUserById(Integer id) throws UserException {
         Optional<User> user = userRepository.findById(id);
         if(user.isPresent()){
             return user.get();
         }
-        throw new Exception("user not found");
+        throw new UserException("user not found");
     }
 
     @Override
-    public User findUserByEmail(String email) throws Exception{
+    public User findUserByEmail(String email) throws UserException{
         Optional<User> user= userRepository.findByEmail(email);
         if(user.isPresent()){
             return user.get();
         }
-        throw new Exception("user not found with email "+email);
+        throw new UserException("user not found with email "+email);
     }
 
     @Override
@@ -70,12 +71,12 @@ public class UserServiceImplementation implements UserService{
     }
 
     @Override
-    public User findUserByJwt(String jwt) throws Exception{
+    public User findUserByJwt(String jwt) throws UserException{
         String email = JwtProvider.getEmailFromJwtToken(jwt);
         Optional<User> user=userRepository.findByEmail(email);
         if(user.isPresent())
             return user.get();
-        throw new Exception("user not found with given token");
+        throw new UserException("user not found with given token");
     }
 
     public User followUserById(Integer reqUserId, Integer userId2) throws Exception {
