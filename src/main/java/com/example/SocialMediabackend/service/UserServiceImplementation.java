@@ -21,7 +21,7 @@ public class UserServiceImplementation implements UserService{
     public User registerUser(User inputUser) throws Exception {
         User newUser = new User();
         newUser.setUsername(inputUser.getUsername());
-        newUser.setId(inputUser.getId());
+        newUser.setGender(inputUser.getGender());
         newUser.setFirstName(inputUser.getFirstName());
         newUser.setLastName(inputUser.getLastName());
         newUser.setEmail(inputUser.getEmail());

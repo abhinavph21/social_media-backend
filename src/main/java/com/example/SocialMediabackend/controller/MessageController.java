@@ -1,5 +1,6 @@
 package com.example.SocialMediabackend.controller;
 
+import com.example.SocialMediabackend.model.Chat;
 import com.example.SocialMediabackend.model.Message;
 import com.example.SocialMediabackend.model.User;
 import com.example.SocialMediabackend.service.MessageService;
@@ -21,8 +22,8 @@ public class MessageController {
                                  @PathVariable Integer chatId,
                                  @RequestBody Message inputMessage) throws Exception {
         User reqUser = userService.findUserByJwt(jwt);
-        Message newMessage = messageService.createMessage(reqUser, chatId, inputMessage );
-        return newMessage;
+        Message savedMessage = messageService.createMessage(reqUser, chatId, inputMessage );
+        return savedMessage;
     }
     @GetMapping("/api/chats/{chatId}/messages")
     public List<Message> getChatMessages(@RequestHeader("Authorization") String jwt,

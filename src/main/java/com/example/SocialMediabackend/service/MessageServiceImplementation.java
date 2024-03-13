@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Service
 public class MessageServiceImplementation implements MessageService{
     @Autowired
@@ -24,19 +26,22 @@ public class MessageServiceImplementation implements MessageService{
         try {
             Message newMessage = new Message();
             Chat chat = chatService.findChatById(chatId);
+//            Chat newChat = new Chat();
             newMessage.setChat(chat);
+            newMessage.setParentChatId(chat.getId());
             newMessage.setContent(inputMsg.getContent());
             newMessage.setImage(inputMsg.getImage());
             newMessage.setUser(user);
             newMessage.setTimestamp(LocalDateTime.now());
-
+//            System.out.println(newMessage.getChat()+ " "+newMessage.getUser());
             Message savedMessage =  messageRepository.saveAndFlush(newMessage);
+            System.out.println(savedMessage);
             List<Message> chatMessages = chat.getMessages();
             if(chatMessages==null){
                 chatMessages=new ArrayList<>();
                 chatMessages.add(savedMessage);
                 chat.setMessages(chatMessages);
-            } else{
+            } else {
                 chatMessages.add(savedMessage);
             }
             chatRepository.saveAndFlush(chat);

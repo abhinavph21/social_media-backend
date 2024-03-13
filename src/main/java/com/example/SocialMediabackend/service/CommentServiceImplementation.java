@@ -29,7 +29,7 @@ public class CommentServiceImplementation implements CommentService{
             comment.setUser(user);
             comment.setContent(comment.getContent());
             comment.setCreatedAt(LocalDateTime.now());
-
+            comment.setParentPostId(post.getId());
             Comment savedComment = commentRepository.saveAndFlush(comment);
             List<Comment> comments = post.getComments();
             if(comments==null)

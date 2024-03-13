@@ -31,7 +31,9 @@ public class User {
     private String lastName;
     private String mobile;
 
-    String gender;
+    private String bio;
+
+    private String gender;
 
     private List<Integer> followers;
 

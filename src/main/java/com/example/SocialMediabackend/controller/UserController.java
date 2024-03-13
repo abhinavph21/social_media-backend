@@ -79,6 +79,7 @@ public class UserController {
         try {
             User user = userService.findUserByJwt(jwt);
             user.setPassword(null);
+            System.out.println(user);
             return user;
         } catch (Exception exception){
             throw new UserException(exception.toString());

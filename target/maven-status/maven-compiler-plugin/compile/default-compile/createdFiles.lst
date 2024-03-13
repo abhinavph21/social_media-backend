@@ -1,5 +1,6 @@
 com/example/SocialMediabackend/SocialMediaBackendApplication.class
 com/example/SocialMediabackend/repository/CommentRepository.class
+com/example/SocialMediabackend/config/WebSocketConfig.class
 com/example/SocialMediabackend/service/CustomerUserDetailsService.class
 com/example/SocialMediabackend/controller/MessageController.class
 com/example/SocialMediabackend/model/Post.class
@@ -44,6 +45,7 @@ com/example/SocialMediabackend/controller/ChatController.class
 com/example/SocialMediabackend/service/StoryService.class
 com/example/SocialMediabackend/service/UserServiceImplementation.class
 com/example/SocialMediabackend/config/JwtConstant.class
+com/example/SocialMediabackend/controller/RealTimeChat.class
 com/example/SocialMediabackend/service/MessageService.class
 com/example/SocialMediabackend/service/MessageServiceImplementation.class
 com/example/SocialMediabackend/repository/MessageRepository.class

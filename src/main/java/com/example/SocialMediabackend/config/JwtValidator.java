@@ -21,7 +21,7 @@ public class JwtValidator extends OncePerRequestFilter {
 //        request header like in postman
 //        System.out.println(JwtConstant.JWT_HEADER);
         String jwtToken = request.getHeader(JwtConstant.JWT_HEADER);
-
+//        System.out.println(jwtToken);
         if (jwtToken!=null){
             try {
                 String email = JwtProvider.getEmailFromJwtToken(jwtToken);

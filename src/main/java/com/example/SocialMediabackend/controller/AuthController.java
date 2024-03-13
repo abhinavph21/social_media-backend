@@ -40,7 +40,10 @@ public class AuthController {
         newUser.setFirstName(inputUser.getFirstName());
         newUser.setLastName(inputUser.getLastName());
         newUser.setEmail(inputUser.getEmail());
+        newUser.setGender(inputUser.getGender());
+        System.out.println(newUser+ " "+inputUser);
         newUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
+        System.out.println(newUser);
         try {
             User savedUser= userRepository.saveAndFlush(newUser);
             System.out.println(savedUser + " saved user");
