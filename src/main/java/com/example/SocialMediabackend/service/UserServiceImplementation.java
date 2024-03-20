@@ -102,10 +102,10 @@ public class UserServiceImplementation implements UserService{
 
             System.out.println(reqUserId+ " following " + userWhoFollows.getFollowing());
 
-            userRepository.saveAndFlush(userToFollow);
-            User updatedUserWhoFollows = userRepository.saveAndFlush(userWhoFollows);
-            System.out.println(updatedUserWhoFollows+ " user from db");
-            return updatedUserWhoFollows;
+            User updatedFollowedUser = userRepository.saveAndFlush(userToFollow);
+            userRepository.saveAndFlush(userWhoFollows);
+            System.out.println(updatedFollowedUser+ " user from db");
+            return updatedFollowedUser;
         } catch (Exception exception){
             System.out.println("exception in following");
             throw new Exception(exception.toString());
@@ -113,6 +113,7 @@ public class UserServiceImplementation implements UserService{
     }
     public User updateUserById(User user, Integer userId) throws Exception {
         User updatedUser = null;
+        System.out.println(user);
         try {
             User foundUser = findUserById(userId);
             if(user.getFirstName()!=null)
@@ -121,11 +122,12 @@ public class UserServiceImplementation implements UserService{
                 foundUser.setLastName(user.getLastName());
             if(user.getEmail()!=null)
                 foundUser.setEmail(user.getEmail());
-            if(user.getPassword()!=null)
-                foundUser.setPassword(user.getPassword());
-            if (user.getGender()!=null)
-                foundUser.setGender(user.getGender());
+            if(user.getImage()!=null)
+                foundUser.setImage(user.getImage());
+            if (user.getBio()!=null)
+                foundUser.setBio(user.getBio());
             updatedUser = userRepository.saveAndFlush(foundUser);
+            System.out.println(updatedUser);
             return updatedUser;
         } catch(Exception exception){
             throw new Exception(exception.toString());

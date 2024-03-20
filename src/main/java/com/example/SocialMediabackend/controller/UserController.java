@@ -54,7 +54,7 @@ public class UserController {
             throw new UserException(exception.toString());
         }
     }
-    @PutMapping("/api/users/follow/{userId2}")
+    @PutMapping("/api/users/{userId2}/follow")
     public User followUser(@RequestHeader("Authorization")String jwt,  @PathVariable Integer userId2) throws UserException {
         try {
             User reqUser = userService.findUserByJwt(jwt);

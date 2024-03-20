@@ -35,6 +35,8 @@ public class User {
 
     private String gender;
 
+    private String image;
+
     private List<Integer> followers;
 
     private List<Integer> following;
